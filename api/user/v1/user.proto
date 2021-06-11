@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+option go_package = "user/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+service UserService {
+  rpc ClientManualAuthorize (ManualAuthorizeRequest) returns (ManualAuthorizeReply) {
+    option(google.api.http) = {
+      post: "/v1/user"
+      body: "*"
+    };
+  }
+}
+
+message ManualAuthorizeRequest {
+  string username = 1 [(validate.rules).string = {min_len: 5, max_len: 20}]; // the title of string must be between 5 and 50 character
+  string password = 2;
+}
+
+message User {
+  int64 plat_user_id = 1;
+  string username = 2;
+  string telnum = 3;
+}
+
+message ManualAuthorizeReply {
+  User User = 1;
+}
+
+
+
