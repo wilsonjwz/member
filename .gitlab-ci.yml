@@ -19,17 +19,17 @@ test:
   only:
     - tags
 # 定义 job
-build:
-  stage: build
-  tags:
-    - test
-  script:
-    - echo "开始构建程序"
-    - make pack ENV="prod" VERSION=${VERSION}
-    - pwd
-    - if [ ! -d "/home/当前用户/data/code/test_cli/tags/${VERSION}" ]; then
-      mkdir -p "/home/当前用户/data/code/test_cli/tags/${VERSION}/";
-      fi
-    - mv ${CI_PROJECT_NAME}_${VERSION}.tar.gz /home/当前用户/data/code/test_cli/tags/${VERSION}/
-  only:
-    - tags
+#build:
+#  stage: build
+#  tags:
+#    - test
+#  script:
+#    - echo "开始构建程序"
+#    - make pack ENV="prod" VERSION=${VERSION}
+#    - pwd
+#    - if [ ! -d "/home/当前用户/data/code/test_cli/tags/${VERSION}" ]; then
+#      mkdir -p "/home/当前用户/data/code/test_cli/tags/${VERSION}/";
+#      fi
+#    - mv ${CI_PROJECT_NAME}_${VERSION}.tar.gz /home/当前用户/data/code/test_cli/tags/${VERSION}/
+#  only:
+#    - tags
