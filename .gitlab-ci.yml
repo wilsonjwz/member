@@ -1,11 +1,35 @@
-tages:
+# 在每个任务执行前运行
+before_script:
+  - export VERSION=`echo ${CI_COMMIT_TAG} | awk -F"_" '{print $1}'`
+stages:
   - test
-
-build:
+  - build
+# 定义 job
+test:
   stage: test
+  tags:
+    - test
   script:
-    - cd static
-    - make test
+    - echo "我是 tast 任务"
+    - echo "git 提交的 tag"
+    - echo ${CI_COMMIT_TAG}
+    - echo ${CI_PROJECT_NAME}
+    - echo ${VERSION}
+    - echo $GOPATH
   only:
-    - master
-    - develop
+    - tags
+# 定义 job
+build:
+  stage: build
+  tags:
+    - test
+  script:
+    - echo "开始构建程序"
+    - make pack ENV="prod" VERSION=${VERSION}
+    - pwd
+    - if [ ! -d "/home/当前用户/data/code/test_cli/tags/${VERSION}" ]; then
+      mkdir -p "/home/当前用户/data/code/test_cli/tags/${VERSION}/";
+      fi
+    - mv ${CI_PROJECT_NAME}_${VERSION}.tar.gz /home/当前用户/data/code/test_cli/tags/${VERSION}/
+  only:
+    - tags
