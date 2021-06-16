@@ -74,7 +74,7 @@ build:
 .PHONY: test
 # test
 test:
-	go test -v -cover ./...
+	go test -short $(go list ./... | grep -v /vendor/)
 
 .PHONY: all
 # generate all
