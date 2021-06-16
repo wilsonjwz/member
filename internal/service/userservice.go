@@ -33,7 +33,7 @@ func (s *UserServiceService) ClientManualAuthorize(ctx context.Context, req *pb.
 	s.log.Infof("plat_user data %v", platUser)
 	// 检查密码
 	isRight, err := util.CheckPassword(req.Password, platUser.Password, platUser.PasswordStr)
-	if err != nil || isRight == false {
+	if err != nil || !isRight {
 		s.log.Error(err)
 		return nil, errors.BadRequest(pb.ErrorReason_WRONG_PASSWORD.String(), "帐号或密码错误")
 	}
