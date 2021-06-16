@@ -21,6 +21,7 @@ func CheckPassword(inputPassword, userPassword, passwordStr string) (bool, error
 	return true, nil
 }
 
+// addSalt
 func addSalt(inputPassword, passwordStr string) string {
 	encryStr := Md5(inputPassword)[16:26] + passwordStr
 	hashStr := Md5(encryStr)
