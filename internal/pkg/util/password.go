@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// 检查密码
+//CheckPassword 检查密码
 func CheckPassword(inputPassword, userPassword, passwordStr string) (bool, error) {
 	if inputPassword == "" {
 		return false, errors.New("password is empty")
@@ -21,13 +21,14 @@ func CheckPassword(inputPassword, userPassword, passwordStr string) (bool, error
 	return true, nil
 }
 
-// addSalt
+// addSalt 生成加密盐值
 func addSalt(inputPassword, passwordStr string) string {
 	encryStr := Md5(inputPassword)[16:26] + passwordStr
 	hashStr := Md5(encryStr)
 	return HashSha256(hashStr)
 }
 
+//Md5 gen md5 string
 func Md5(str string) string {
 	data := []byte(str)
 	has := md5.Sum(data)
@@ -35,6 +36,7 @@ func Md5(str string) string {
 	return md5str1
 }
 
+// HashSha256  sha256加密
 func HashSha256(str string) string {
 	//使用sha256哈希函数
 	h := sha256.New()

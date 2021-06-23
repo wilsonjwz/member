@@ -13,7 +13,7 @@ type userRepo struct {
 	log  *log.Helper
 }
 
-// NewUserRepo
+// NewUserRepo 构造
 func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 	return &userRepo{
 		data: data,

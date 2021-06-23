@@ -10,12 +10,14 @@ import (
 	pb "user/api/user/v1"
 )
 
+// UserServiceService 用户
 type UserServiceService struct {
 	pb.UnimplementedUserServiceServer
 	log  *log.Helper
 	user *biz.UserUsecase
 }
 
+// NewUserServiceService 构造用户
 func NewUserServiceService(user *biz.UserUsecase, logger log.Logger) *UserServiceService {
 	return &UserServiceService{
 		user: user,
@@ -23,6 +25,7 @@ func NewUserServiceService(user *biz.UserUsecase, logger log.Logger) *UserServic
 	}
 }
 
+// ClientManualAuthorize 账密登陆
 func (s *UserServiceService) ClientManualAuthorize(ctx context.Context, req *pb.ManualAuthorizeRequest) (*pb.ManualAuthorizeReply, error) {
 	s.log.Infof("input data %v", req)
 	platUser, err := s.user.FindByUserName(ctx, req.Username)

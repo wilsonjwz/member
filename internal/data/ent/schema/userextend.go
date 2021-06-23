@@ -14,7 +14,7 @@ type UserExtend struct {
 	ent.Schema
 }
 
-// 用户实体的注解
+// Annotations 用户实体的注解
 func (UserExtend) Annotations() []schema.Annotation {
 	return []schema.Annotation{
 		entsql.Annotation{Table: "plat_user_extend"},

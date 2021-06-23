@@ -1,6 +1,6 @@
 # 在每个任务执行前运行
-#before_script:
-#  - export VERSION=`echo ${CI_COMMIT_TAG} | awk -F"_" '{print $1}'`
+before_script:
+  - export VERSION=`echo ${CI_COMMIT_TAG} | awk -F"_" '{print $1}'`
 stages:
   - test
   - build
